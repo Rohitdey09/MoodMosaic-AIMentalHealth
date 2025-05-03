@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebRTC Video Consultation</title>
+    <style>
+        video {
+            width: 45%;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>WebRTC Video Consultation</h1>
+    <video id="localVideo" autoplay playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script>
+        const localVideo = document.getElementById('localVideo');
+        const remoteVideo = document.getElementById('remoteVideo');
+        const socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+
+        let localStream;
+        let peerConnection;
+        const config = {
+            'iceServers': [{'urls': 'stun:stun.l.google.com:19302'}]
+        };
+
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(stream => {
+                localVideo.srcObject = stream;
+                localStream = stream;
+                socket.emit('message', { type: 'offer' });
+            })
+            .catch(error => console.error('Error accessing media devices.', error));
+
+        socket.on('message', message => {
+            if (message.type === 'offer') {
+                createOffer();
+            } else if (message.type === 'answer') {
+                peerConnection.setRemoteDescription(new RTCSessionDescription(message));
+            } else if (message.type === 'candidate') {
+                peerConnection.addIceCandidate(new RTCIceCandidate(message.candidate));
+            }
+        });
+
+        function createOffer() {
+            peerConnection = new RTCPeerConnection(config);
+            peerConnection.addStream(localStream);
+            peerConnection.onaddstream = event => {
+                remoteVideo.srcObject = event.stream;
+            };
+            peerConnection.onicecandidate = event => {
+                if (event.candidate) {
+                    socket.emit('message', { type: 'candidate', candidate: event.candidate });
+                }
+            };
+            peerConnection.createOffer()
+                .then(offer => {
+                    peerConnection.setLocalDescription(offer);
+                    socket.emit('message', offer);
+                })
+                .catch(error => console.error('Error creating offer.', error));
+        }
+    </script>
+</body>
+</html>
