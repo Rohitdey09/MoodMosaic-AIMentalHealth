@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodMosiac - Machine Learning-based Emotion Detection</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='image.png') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">MoodMosiac</div>
+        <nav class="nav">
+            <a href="Home.html">Home</a>
+            <a href="#about-us">About Us</a>
+            <a href="#Detection">Mood Prediction</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>MoodMosiac- Machine Learning-based solution for Mental Health Support</h1>
+            <p>LET'S MAKE YOUR MOOD BETTER</p>
+            <button id="Detection" class="cta-button" onclick="window.location.href='/video_feed'">Know your mood</button>
+            <br>
+            <div class="xyz">
+                <button id="btn2" class="cta-button" onclick="window.location.href='/video-chat'">Therapist Consultation</button>
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+      
+
+        <div class="co">
+            <div class="cont">
+                <h1 id="bcd">Welcome to <span class="highlight">MoodMosiac</span></h1>
+                <p id="abc">With busy lifestyles, people often struggle to focus on their mental well-being. Consulting a therapist each time they feel distressed can be challenging, leading many to rely on online resources for mental health advice. Unfortunately, these resources can sometimes mislead or overwhelm users, contributing to confusion or even worsening anxiety. Through machine learning, we can address this gap by developing a system that detects emotions and provides accurate mental health insights. This technology empowers users to better understand and manage their mental health in a safe and accessible way.</p>
+            </div>
+            <div class="image">
+                <img src="{{ url_for('static', filename='image3.jpg') }}" alt="Healthcare professional" alt="Healthcare professional">
+            </div>
+        </div>
+
+    </section>
+    
+
+    <section class="welcome-section">
+        <br>
+        <div class="con">
+            <div class="left-content">
+                <h1 class="fade-in">MoodMosiac</h1>
+                <h2 class="fade-in">Purpose of the web-app</h2>
+                <p id="para"  class="fade-in">
+                    This project aims to design a web application that enables users to assess their mental health status by detecting emotions and offering personalized insights with a confidence score. It provides a more reliable alternative to random online searches, helping users avoid misinformation and promoting accurate self-reflection. This tool is particularly valuable for those with limited access to mental health resources, such as students in remote areas, offering them a convenient way to monitor their well-being and make informed decisions about seeking further support if needed.
+                </p>
+                <p id="para1" class="fade-in">
+                    Online resources for mental health advice can often be misleading, sometimes framing mild issues as severe conditions, which can induce unnecessary worry and stress. By using machine learning, we address this problem through a model trained to assess emotional states accurately based on user input. This allows us to offer more precise mental health insights, reducing the risk of misinformation and unnecessary anxiety, and providing a dependable resource for individuals seeking support for their well-being.
+                </p>
+            </div>
+            <div class="right-content"></div>
+        </div>
+    
+    </section>
+    <footer id="about-us">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>More</h3>
+                <ul>
+                    <li><a href="#">Terms & Condition</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>University of Engineering & Management,Newtown</p>
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="scroll-top" id="fade-in">↑</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 200 * index);
+            });
+        });
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const highlight = document.querySelector('.highlight');
+            highlight.style.color = '#007bff';
+
+            highlight.addEventListener('mouseover', function() {
+                this.style.color = '#0056b3';
+            });
+
+            highlight.addEventListener('mouseout', function() {
+                this.style.color = '#007bff';
+            });
+        });
+    </script>
+
+<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2024/11/08/19/20241108190858-ITWLTJTI.js"></script>
+
+</body>
+</html>
